@@ -36,9 +36,7 @@ int sizeToDelete = SizeRequired - currentFreeSpace;
 Console.WriteLine("Free space needed: {0}", sizeToDelete);
 
 // Find an element in 'results' closest to 'sizeToDelete'
-var candidates = results.Where(x => x.Value >= sizeToDelete).Select(x => x.Value);
-var sorted = candidates.Order();
-int candidate = sorted.First();
+int candidate = results.Where(x => x.Value >= sizeToDelete).Select(x => x.Value).Order().First();
 
 Console.WriteLine("Part 2: Size to delete: {0}", candidate);
 
