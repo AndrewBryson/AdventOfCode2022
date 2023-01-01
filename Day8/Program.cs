@@ -36,8 +36,6 @@ internal class Program
             for (int c = 0; c < line.Length ; c++)
             {
                 int number = int.Parse(line[c].ToString());
-                //trees[i, c] = number;
-
                 Tree tree = new Tree() { Height = number, X = i, Y = c };
                 treeData[i, c] = tree;
             }
@@ -54,12 +52,10 @@ internal class Program
             // Left to right
             treeSlice = GetSliceTreeData(treeData, new List<int>() { x }, Enumerable.Range(0, sideLength).ToList());
             CalculateTreeVisibility(treeSlice, treeResults);
-            //Console.WriteLine("x: {0}, result l-r: {1}", x, treeResults.Count);
 
             // Now right to left on the same slice
             treeSlice = GetSliceTreeData(treeData, new List<int>() { x }, Enumerable.Range(0, sideLength).OrderDescending().ToList());
             CalculateTreeVisibility(treeSlice, treeResults);
-            //Console.WriteLine("x: {0}, result r-l: {1}", x, treeResults.Count);
         }
 
         // Top and bottom
@@ -68,12 +64,10 @@ internal class Program
             // Top to bottom
             treeSlice = GetSliceTreeData(treeData, Enumerable.Range(0, sideLength).ToList(), new List<int>() { y });
             CalculateTreeVisibility(treeSlice, treeResults);
-            //Console.WriteLine("y: {0}, result top-bottom: {1}", y, treeResults.Count);
 
             // Now bottom to top on the same slice
             treeSlice = GetSliceTreeData(treeData, Enumerable.Range(0, sideLength).OrderDescending().ToList(), new List<int>() { y });
             CalculateTreeVisibility(treeSlice, treeResults);
-            //Console.WriteLine("y: {0}, result bottom-top: {1}", y, treeResults.Count);
         }
 
         var distinct = treeResults.Distinct();
@@ -88,7 +82,6 @@ internal class Program
             for (int y = 0; y < sideLength; y++)
             {
                 Tree tree = treeData[x, y];
-                Console.WriteLine("{0}: X:{1}, Y:{2}, height: {3}", distanceResults.Count, tree.X, tree.Y, tree.Height);
                 int result = CalculateTreeDistanceView(tree, treeData);
                 distanceResults.Add(tree, result);
             }
@@ -97,7 +90,7 @@ internal class Program
         // Sort to find the best tree
         var sorted = distanceResults.Select(x => x.Value).OrderDescending().ToList();
         var first = sorted.First();
-        Console.WriteLine(first);
+        Console.WriteLine("Scenic score: {0}", first);
     }
 
     private static int CalculateTreeDistanceView(Tree point, Tree[,] forest)
@@ -105,7 +98,6 @@ internal class Program
         int top = 0, down = 0, left = 0, right = 0;
         int sideLength = forest.GetLength(0);
         int distanceToEdge = 0;
-        int soFar = 0;
 
         // Look Up: forest[?-, y]
         distanceToEdge = point.X != 0 ? (point.X - 1) : 0;
