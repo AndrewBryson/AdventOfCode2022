@@ -1,8 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Runtime.CompilerServices;
 
-Console.WriteLine("Hello, World!");
-
 string input = File.ReadAllText(@"input.txt");
 List<string> parts = input.Split('\n').ToList();
 
@@ -16,7 +14,9 @@ for (int i = 0; i < parts.Count; i++)
 }
 
 // Move pointer to the root
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 tree = tree.Parent;
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
 Dictionary<string, int> results = new Dictionary<string, int>();
 GetDirectorySizes(tree, results);
