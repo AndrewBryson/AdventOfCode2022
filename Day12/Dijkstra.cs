@@ -45,10 +45,10 @@ namespace Day12
             Console.WriteLine("Vertex    Distance from source");
 
             for (int i = 0; i < verticesCount; ++i)
-                Console.WriteLine("{0}\t  {1}", i, distance[i]);
+                Console.WriteLine("{0}:\t  {1}", i, distance[i]);
         }
 
-        public static void Dijkstra(int[,] graph, int source, int verticesCount)
+        public static int[] Dijkstra(int[,] graph, int source, int verticesCount)
         {
             int[] distance = new int[verticesCount];
             bool[] shortestPathTreeSet = new bool[verticesCount];
@@ -72,6 +72,8 @@ namespace Day12
             }
 
             Print(distance, verticesCount);
+
+            return distance;
         }
 
 
