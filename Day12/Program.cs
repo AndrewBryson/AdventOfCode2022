@@ -52,6 +52,7 @@ namespace Day12
                 }
             }
 
+            // Add all the neighbours of each node using coordinates
             for (int y = 0; y < split.Length; y++)
             {
                 string line = split[y].Trim();
@@ -105,6 +106,7 @@ namespace Day12
             // All 'a' nodes
             var aNodeSequences = nodes.Where(x => x.Elevation == 1).Select(x => x.Sequence).ToList();
             List<int> distances = new List<int>();
+            // Get the distance values to all 'a' nodes and report the shortest.
             for (int i = 0; i < results.Length; i++)
             {
                 if (aNodeSequences.Contains(i)) 
